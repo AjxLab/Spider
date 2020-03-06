@@ -10,3 +10,9 @@ Show a summary of this spider here and about the following items.
 * about data to fetch
 * about when to fetch
 
+
+## Requirements
+* OS
+* Language
+* Libraries
+
