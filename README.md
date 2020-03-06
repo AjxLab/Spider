@@ -18,10 +18,16 @@ Show a summary of this spider here and about the following items.
 
 
 ## Installation
+1. Clone this repo
 ```sh
 $ git clone <this repo>
 $ cd <this repo>
-
+```
+2. Build gems
+```sh
 $ bundle install
 ```
 
+
+## Author
+* Tatsuya Abe <abe12@mccc.jp>
