@@ -16,3 +16,12 @@ Show a summary of this spider here and about the following items.
 * Language
 * Libraries
 
+
+## Installation
+```sh
+$ git clone <this repo>
+$ cd <this repo>
+
+$ bundle install
+```
+
