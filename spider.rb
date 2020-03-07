@@ -12,7 +12,7 @@ $account = YAML.load_file('config/.mail.yml')
 $model = Model.new(YAML.load_file('config/db.yml')['file'])
 
 
-def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert: false)
+def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert: false, echo_bar: true)
   ## -----*----- クローリング -----*----- ##
   # delay：Float --> アクセス間隔
   # depth_limit：Int --> クロールする深さ
@@ -44,10 +44,10 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert:
     }
 
     tw = ThreadsWait.new(*threads)
-    mdap(urls.length) {tw.next_wait}
+    mdap(urls.length, echo_bar: echo_bar) {tw.next_wait}
   else
     # 逐次処理 ==================================
-    mdap(urls.length) { |i|
+    mdap(urls.length, echo_bar: echo_bar) { |i|
       task.call(urls[i])
     }
   end
