@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
 Bundler.require
+require './mail'
+
 
 START_TIME = Time.new
-
-
-def connect_gmail(file: '.mail.yml')
-  ## -----*----- Gmailアカウント -----*----- ##
-  begin
-    account = YAML.load_file(file)
-  rescue => error
-    puts "\e[31m#{error}\e[0m"
-    puts 'Please set up gmail by executing the following command.'
-    puts '$ bundle exec rake setup:gmail'
-
-    footer_exit status: 1
-  end
-
-  ## Connect Gmail with Application Password
-  Gmail.new(account['address'], account['password'])
-end
 
 
 def footer_exit(status: 0)
@@ -38,8 +23,10 @@ def footer_exit(status: 0)
 end
 
 
+
 if __FILE__ == $0
-  connect_gmail
+  #connect_gmail
+  send_mail('abe12@mccc.jp', 'test', 'メール送信に成功')
   footer_exit
 end
 
