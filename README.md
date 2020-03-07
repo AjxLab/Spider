@@ -15,9 +15,8 @@ Show a summary of this spider here and about the following items.
 
 
 ## Requirements
-* OS
-* Language
-* Libraries
+* macOS
+* Ruby 2.7
 
 
 ## Usage
@@ -30,6 +29,41 @@ Application Password：**********  # Enter your application password
 ### Start Crawling
 ```sh
 $ bundle exec ruby spider.rb
+```
+### Database
+#### Migratiton
+1. Write DB settings in [db.yml](config/db.yml)
+* file -> sqlite3 file path (required)
+* name -> column name (not required)
+* type -> column type (required)
+* opts -> column opts (not required)
+```yml
+file:
+  'your db file'
+tables:
+  - <table name>:
+    - name: <column name>
+      type: <column type>
+      opts:
+        - <column opts>
+        - 'unique: true'
+        - 'null: false'
+    - name: ...
+      type: ...
+  - <table name>:
+    ...
+```
+2. Execute migration command
+```sh
+$ bundle exec rake db:migrate
+```
+#### Clear DB
+```sh
+$ bundle exec rake db:clear
+```
+#### Clear Table
+```sh
+$ bundle exec rake db:clear_<tablename>
 ```
 
 

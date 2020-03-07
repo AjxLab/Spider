@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 Bundler.require
 require './scraping'
+require './model'
 require './mailer'
 
 
 START_TIME = Time.new
 URL = 'http://www.example.com/'
-Log = Logger.new('log/develop.log')
-Account = YAML.load_file('.mail.yml')
+$logger = Logger.new('log/develop.log')
+$account = YAML.load_file('config/.mail.yml')
+$model = Model.new(YAML.load_file('config/db.yml')['file'])
 
 
-def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert: true)
+def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert: false)
   ## -----*----- クローリング -----*----- ##
   # delay：Float --> アクセス間隔
   # depth_limit：Int --> クロールする深さ
@@ -27,8 +29,8 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert:
       # スクレイピング
       scraping(agent)
     rescue => e
-      Log.error(e.to_s)
-      send_mail(Account[:receive][:address], 'エラー発生', e.to_s)  if error_alert
+      $logger.error(e.to_s)
+      send_mail($account[:receive][:address], 'エラー発生', e.to_s)  if error_alert
       footer_exit(status: 1)  if exit_all
     end
   }

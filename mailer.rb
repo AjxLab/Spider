@@ -1,4 +1,4 @@
-def connect_gmail(file: '.mail.yml')
+def connect_gmail(file: 'config/.mail.yml')
   ## -----*----- Gmailアカウント -----*----- ##
   begin
     account = YAML.load_file(file)
@@ -15,7 +15,7 @@ def connect_gmail(file: '.mail.yml')
 end
 
 
-def send_mail(to_address, title, sentence)
+def send_mail(to_address, _subject, _body)
   ## -----*----- メール送信 -----*----- ##
   # to_address；送信先のアドレス
   # title：メールタイトル
@@ -27,10 +27,10 @@ def send_mail(to_address, title, sentence)
   message =
     $gmail.generate_message do
       to to_address
-      subject title
+      subject _subject
       html_part do
         content_type "text/html; charset=UTF-8"
-        body sentence
+        body _body
       end
     end
 
