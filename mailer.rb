@@ -1,4 +1,4 @@
-def connect_gmail(file: '.mail.yml')
+def connect_gmail(file: 'config/.mail.yml')
   ## -----*----- Gmailアカウント -----*----- ##
   begin
     account = YAML.load_file(file)
@@ -15,7 +15,7 @@ def connect_gmail(file: '.mail.yml')
 end
 
 
-def send_mail(to_address, title, sentence)
+def send_mail(to_address, _subject, _body)
   ## -----*----- メール送信 -----*----- ##
   # to_address；送信先のアドレス
   # title：メールタイトル
@@ -24,15 +24,14 @@ def send_mail(to_address, title, sentence)
   # Gmailオブジェクトが未生成
   connect_gmail unless defined? $gmail
 
-  message =
-    $gmail.generate_message do
-      to to_address
-      subject title
-      html_part do
-        content_type "text/html; charset=UTF-8"
-        body sentence
-      end
-    end
+  message = $gmail.generate_message {
+    to to_address
+    subject _subject
+    html_part {
+      content_type "text/html; charset=UTF-8"
+      body _body
+    }
+  }
 
   $gmail.deliver(message)
 end
