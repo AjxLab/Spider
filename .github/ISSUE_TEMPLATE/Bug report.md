@@ -4,17 +4,17 @@ about: バグの詳細を記載する - Provide bug details
 
 ---
 
-# 概要 - Overview
+## 概要 - Overview
 
 
-# 再現手順 - Reproduction steps
+## 再現手順 - Reproduction steps
 
 
-# 修正しないとどう困るか - Troubled point
+## 修正しないとどう困るか - Troubled point
 
 
-# 原因 - Cause
+## 原因 - Cause
 
 
-# 修正案 - amendment
+## 修正案 - amendment
 
