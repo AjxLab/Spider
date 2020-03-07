@@ -14,7 +14,7 @@ def connect_gmail(file: '.mail.yml')
   end
 
   ## Connect Gmail with Application Password
-  $gmail = Gmail.new(account['address'], account['password'])
+  $gmail = Gmail.new(account[:send][:address], account[:send][:password])
 end
 
 
@@ -39,11 +39,4 @@ def send_mail(to_address, title, sentence)
 
   $gmail.deliver(message)
 end
-
-
-if __FILE__ == $0
-  Bundler.require
-  send_mail('abe12@mccc.jp', '送信テスト', 'メール送信に成功')
-end
-
 

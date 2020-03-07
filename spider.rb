@@ -5,14 +5,16 @@ require './mailer'
 
 START_TIME = Time.new
 URL = 'http://www.example.com/'
-LOG = Logger.new('develop.log')
+Log = Logger.new('develop.log')
+Account = YAML.load_file('.mail.yml')
 
 
-def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true)
+def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert: true)
   ## -----*----- クローリング -----*----- ##
   # delay：Float --> アクセス間隔
   # depth_limit：Int --> クロールする深さ
   # multi：Bool --> 並列処理(true) or 逐次処理(false)
+  # exit_all：Bool --> エラーが発生した場合に，全てのタスクを終了
 
   # ターゲットURLを指定（Array）
   urls = [URL, URL, URL, 'http://1028051', URL]
@@ -25,8 +27,9 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true)
       # スクレイピング
       # ==============
     rescue => e
-      LOG.error("#{e}")
-      footer_exit status: 1  if exit_all
+      Log.error("#{e}")
+      send_mail(Account[:receive][:address], 'エラー発生', e.to_s)  if error_alert
+      footer_exit(status: 1)  if exit_all
     end
   }
 
@@ -62,13 +65,15 @@ def footer_exit(status: 0)
     puts "\e[31mERROR\e[0m"
   end
 
+  yield  if block_given?
+
   exit status
 end
 
 
 
 if __FILE__ == $0
-  crawl(multi: true)
+  crawl(multi: true, exit_all: false)
   footer_exit
 end
 
