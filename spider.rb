@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 Bundler.require
-require './mail'
+require './mailer'
 
 
 START_TIME = Time.new
 URL = 'http://www.example.com/'
+LOG = Logger.new('develop.log')
 
 
 def crawl(delay: 3, depth_limit: nil, multi: false)
@@ -14,17 +15,25 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
   # multi：Bool --> 並列処理(true) or 逐次処理(false)
 
   # ターゲットURLを指定（Array）
-  urls = [URL, URL, URL]
+  urls = [URL, URL, URL, 'http://1028051']
+
+  task = Proc.new { |url|
+    begin
+      agent = Husc.new(url)
+
+      # ==============
+      # スクレイピング
+      # ==============
+    rescue => e
+      LOG.error("#{e}")
+    end
+  }
 
   if multi
     # 並列処理 ==================================
     threads = urls.map { |url|
       Thread.new {
-        agent = Husc.new(url)
-
-        # ==============
-        # スクレイピング
-        # ==============
+        task.call(url)
       }
     }
 
@@ -33,11 +42,7 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
   else
     # 逐次処理 ==================================
     mdap(urls.length) { |i|
-      agent = Husc.new(urls[i])
-
-      # ==============
-      # スクレイピング
-      # ==============
+      task.call(urls[i])
     }
   end
 end
