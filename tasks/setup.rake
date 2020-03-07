@@ -46,8 +46,19 @@ end
 namespace :setup do
   desc 'Gmail Settings'
   task :gmail do
-    account = getpass(prompt: ["Gmail Address", "Application Password"])
-    data = {'address'=> account[0], 'password'=> account[1]}
+    puts "1. Enter your address to send."
+    send = getpass(prompt: ["Gmail Address", "Application Password"])
+    puts ""
+    puts "1. Enter your address to receive."
+    receive = getpass(prompt: ["Gmail Address"], is_echo: [true])
+
+    data = {
+      send:    {address: send[0], password: send[1]},
+      receive: {address: receive[0]}
+    }
     YAML.dump(data, File.open('.mail.yml', 'w'))
+
+    puts ""
+    puts "Successful to setup Gmail."
   end
 end
