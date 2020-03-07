@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 require 'io/console'
+require 'yaml'
 
 
 def getpass(prompt:["id", "password"], is_echo:[true, false],
@@ -42,9 +43,11 @@ def getpass(prompt:["id", "password"], is_echo:[true, false],
 end
 
 
-
-desc 'Setup'
-task :setup do
-  account = getpass(prompt: ["Gmail Address", "Application Password"])
-  p account
+namespace :setup do
+  desc 'Gmail Settings'
+  task :gmail do
+    account = getpass(prompt: ["Gmail Address", "Application Password"])
+    data = {'address'=> account[0], 'password'=> account[1]}
+    YAML.dump(data, File.open('.mail.yml', 'w'))
+  end
 end
