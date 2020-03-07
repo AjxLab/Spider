@@ -11,7 +11,7 @@ def connect_gmail(file: '.mail.yml')
   rescue => error
     puts "\e[31m#{error}\e[0m"
     puts 'Please set up gmail by executing the following command.'
-    puts '$ bundle exec rake setup'
+    puts '$ bundle exec rake setup:gmail'
 
     footer_exit status: 1
   end
