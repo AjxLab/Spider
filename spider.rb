@@ -26,7 +26,7 @@ def footer_exit(status: 0)
   puts ""
   puts ""
   puts "----------------------------------------------------------------------"
-  puts sprintf("Ran #{status} #{__FILE__} in %5.3fs", Time.new - START_TIME)
+  puts sprintf("Ran #{status} #{$0} in %5.3fs", Time.new - START_TIME)
   puts ""
   if status==0
     puts "\e[32mOK\e[0m"
@@ -38,6 +38,8 @@ def footer_exit(status: 0)
 end
 
 
-
-connect_gmail
+if __FILE__ == $0
+  connect_gmail
+  footer_exit
+end
 
