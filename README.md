@@ -20,6 +20,19 @@ Show a summary of this spider here and about the following items.
 * Libraries
 
 
+## Usage
+### Setup Gmail
+```sh
+$ bundle exec rake setup:gmail
+Gmail Address：your.address@gmail.com     # Enter your gmail address
+Application Password：**********  # Enter your application password
+```
+### Start Crawling
+```sh
+$ bundle exec ruby spider.rb
+```
+
+
 ## Installation
 1. Clone this repo
 ```sh
