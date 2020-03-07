@@ -16,7 +16,7 @@ def webDL(link, file)
 end
 
 
-def scraping(doc)
+def scraping(doc, delay: 3, depth_limit: nil)
   ## -----*----- スクレイピング -----*----- ##
 
   # DBにレコードを追加
