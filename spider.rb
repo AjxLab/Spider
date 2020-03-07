@@ -20,19 +20,16 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
   if multi
     # 並列処理 ==================================
     EM.run {
-      urls.each { |url|
-        agent = Husc.new(url)
-        puts agent.code
+      mdap(urls.length) { |i|
+        agent = Husc.new(urls[i])
         EM.stop_event_loop if (pending -= 1) < 1
       }
     }
   else
     # 逐次処理 ==================================
-    mdap(pending) do |i|
-      urls.each { |url|
-        agent = Husc.new(url)
-      }
-    end
+    mdap(pending) { |i|
+      agent = Husc.new(urls[i])
+    }
   end
 end
 
@@ -56,7 +53,7 @@ end
 
 
 if __FILE__ == $0
-  crawl
+  crawl(multi: true)
   footer_exit
 end
 
