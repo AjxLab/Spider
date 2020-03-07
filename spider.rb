@@ -14,25 +14,26 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
   # multi：Bool --> 並列処理(true) or 逐次処理(false)
 
   # ターゲットURLを指定（Array）
-  urls = [URL]
+  urls = [URL, URL, URL]
+  pending = urls.length
 
   if multi
     # 並列処理 ==================================
-    pending = urls.length
-    #tasks = urls.map { |url|
-    #  {
-    #    # 取得ステータス（0：未完了, 1：完了）
-    #    status: 0,
-    #    # データを取得する処理
-    #    task: Proc.new { Husc.new(url) },
-    #    #
-    #  }
+    EM.run {
+      urls.each { |url|
+        agent = Husc.new(url)
+        puts agent.code
+        EM.stop_event_loop if (pending -= 1) < 1
+      }
     }
   else
     # 逐次処理 ==================================
+    mdap(pending) do |i|
+      urls.each { |url|
+        agent = Husc.new(url)
+      }
+    end
   end
-
-  agent = Husc.new(URL)
 end
 
 
