@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 Bundler.require
+require './scraping'
 require './mailer'
 
 
 START_TIME = Time.new
 URL = 'http://www.example.com/'
-Log = Logger.new('develop.log')
+Log = Logger.new('log/develop.log')
 Account = YAML.load_file('.mail.yml')
 
 
@@ -23,11 +24,10 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert:
     begin
       agent = Husc.new(url)
 
-      # ==============
       # スクレイピング
-      # ==============
+      scraping(agent)
     rescue => e
-      Log.error("#{e}")
+      Log.error(e.to_s)
       send_mail(Account[:receive][:address], 'エラー発生', e.to_s)  if error_alert
       footer_exit(status: 1)  if exit_all
     end

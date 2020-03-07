@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 def connect_gmail(file: '.mail.yml')
   ## -----*----- Gmailアカウント -----*----- ##
   begin

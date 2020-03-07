@@ -2,4 +2,4 @@
 Gemfile.lock
 vendor/
 .mail.yml
-develop.log
+log/develop.log
