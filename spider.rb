@@ -16,8 +16,8 @@ def connect_gmail(file: '.mail.yml')
     footer_exit status: 1
   end
 
-  p Gmail
-  gmail = Gmail.new(account['address'], account['password'])
+  ## Connect Gmail with Application Password
+  Gmail.new(account['address'], account['password'])
 end
 
 
