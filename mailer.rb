@@ -24,15 +24,14 @@ def send_mail(to_address, _subject, _body)
   # Gmailオブジェクトが未生成
   connect_gmail unless defined? $gmail
 
-  message =
-    $gmail.generate_message do
-      to to_address
-      subject _subject
-      html_part do
-        content_type "text/html; charset=UTF-8"
-        body _body
-      end
-    end
+  message = $gmail.generate_message {
+    to to_address
+    subject _subject
+    html_part {
+      content_type "text/html; charset=UTF-8"
+      body _body
+    }
+  }
 
   $gmail.deliver(message)
 end

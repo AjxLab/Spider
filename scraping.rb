@@ -23,7 +23,7 @@ def scraping(doc)
   # $model.<table>.create(col1: value, col2: value...)
 
   # メールにアラートを出す
-  # send_mail(to_addredd, subject, body)
+  # send_mail(to_address, subject, body)
 
   # ログ出力
   # $logger.<level>('log text')

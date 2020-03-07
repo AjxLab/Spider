@@ -4,7 +4,7 @@ Spider
 [![](https://github.com/AjxLab/Spider/workflows/build/badge.svg)](https://github.com/AjxLab/Spider/actions)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-Spider of this [insert link here]().
+Spider of this <[insert link here]()>.
 
 
 ## Description
@@ -17,22 +17,23 @@ Show a summary of this spider here and about the following items.
 ## Requirements
 * macOS
 * Ruby 2.7
+* SQLite3
 
 
 ## Usage
+### Start Crawling
+```sh
+$ bundle exec ruby spider.rb
+```
 ### Setup Gmail
 ```sh
 $ bundle exec rake setup:gmail
 Gmail Address：your.address@gmail.com     # Enter your gmail address
 Application Password：**********  # Enter your application password
 ```
-### Start Crawling
-```sh
-$ bundle exec ruby spider.rb
-```
 ### Database
 #### Migratiton
-1. Write DB settings in [db.yml](config/db.yml)
+1. Write DB settings in [config/db.yml](config/db.yml)
 * file -> sqlite3 file path (required)
 * name -> column name (not required)
 * type -> column type (required)
@@ -53,7 +54,7 @@ tables:
   - <table name>:
     ...
 ```
-2. Execute migration command
+2. Execute migration
 ```sh
 $ bundle exec rake db:migrate
 ```
@@ -80,4 +81,5 @@ $ bundle install
 
 
 ## Author
-* Tatsuya Abe <abe12@mccc.jp>
+* Tatsuya Abe
+* abe12@mccc.jp
