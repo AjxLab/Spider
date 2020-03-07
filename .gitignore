@@ -2,5 +2,4 @@
 Gemfile.lock
 vendor/
 .mail.yml
-log/develop.log
-db/develop.sqlite3
+
