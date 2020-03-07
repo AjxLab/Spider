@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-Bundler.require
 
 
 def connect_gmail(file: '.mail.yml')
@@ -43,6 +42,8 @@ end
 
 
 if __FILE__ == $0
-  send_mail('abe12@mccc.jp', 'test', 'メール送信に成功')
+  Bundler.require
+  send_mail('abe12@mccc.jp', '送信テスト', 'メール送信に成功')
 end
+
 

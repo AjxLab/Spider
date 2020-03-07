@@ -25,8 +25,6 @@ end
 
 
 if __FILE__ == $0
-  #connect_gmail
-  send_mail('abe12@mccc.jp', 'test', 'メール送信に成功')
   footer_exit
 end
 
