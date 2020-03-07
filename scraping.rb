@@ -11,7 +11,7 @@ def webDL(link, file)
     end
 
   rescue => e
-    Log.error(e.to_s)
+    $logger.error(e.to_s)
   end
 end
 
@@ -19,8 +19,12 @@ end
 def scraping(doc)
   ## -----*----- スクレイピング -----*----- ##
 
-  # ====================
-  # 処理を記述
-  # ====================
+  # DBにレコードを追加
+  # $model.<table>.create(col1: value, col2: value...)
 
+  # メールにアラートを出す
+  # send_mail(to_address, subject, body)
+
+  # ログ出力
+  # $logger.<level>('log text')
 end

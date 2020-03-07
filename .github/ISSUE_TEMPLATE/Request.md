@@ -4,14 +4,14 @@ about: 機能追加などの要望を記載する - Describe requests for additi
 
 ---
 
-# 概要 - Overview
+## 概要 - Overview
 
 
-# 目的 - Purpose
+## 目的 - Purpose
 
 
-# 提案内容 - Proposal contents
+## 提案内容 - Proposal contents
 
 
-# タスク - Tasks
+## タスク - Tasks
 
