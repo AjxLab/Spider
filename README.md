@@ -20,6 +20,14 @@ Show a summary of this spider here and about the following items.
 * Libraries
 
 
+## Usage
+### Setup Gmail
+```sh
+$ bundle exec rake setup:gmail
+Gmail Address：test@gmail.com     # Enter your gmail address
+Application Password：**********  # Enter your application password
+```
+
 ## Installation
 1. Clone this repo
 ```sh
