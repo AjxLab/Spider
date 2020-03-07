@@ -30,8 +30,6 @@ Application Password：**********  # Enter your application password
 ### Start Crawling
 ```sh
 $ bundle exec ruby spider.rb
-$ mkdir log
-$ mkdir db
 ```
 
 
