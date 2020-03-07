@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 Bundler.require
 
-
 START_TIME = Time.new
 
 
@@ -16,7 +15,9 @@ def connect_gmail(file: '.mail.yml')
 
     footer_exit status: 1
   end
-  username = ''
+
+  p Gmail
+  gmail = Gmail.new(account['address'], account['password'])
 end
 
 
