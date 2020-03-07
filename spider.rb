@@ -21,6 +21,10 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
     threads = urls.map { |url|
       Thread.new {
         agent = Husc.new(url)
+
+        # ==============
+        # スクレイピング
+        # ==============
       }
     }
 
@@ -30,6 +34,10 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
     # 逐次処理 ==================================
     mdap(urls.length) { |i|
       agent = Husc.new(urls[i])
+
+      # ==============
+      # スクレイピング
+      # ==============
     }
   end
 end
