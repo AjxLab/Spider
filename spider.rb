@@ -15,19 +15,20 @@ def crawl(delay: 3, depth_limit: nil, multi: false)
 
   # ターゲットURLを指定（Array）
   urls = [URL, URL, URL]
-  pending = urls.length
 
   if multi
     # 並列処理 ==================================
-    EM.run {
-      mdap(urls.length) { |i|
-        agent = Husc.new(urls[i])
-        EM.stop_event_loop if (pending -= 1) < 1
+    threads = urls.map { |url|
+      Thread.new {
+        agent = Husc.new(url)
       }
     }
+
+    tw = ThreadsWait.new(*threads)
+    mdap(urls.length) {tw.next_wait}
   else
     # 逐次処理 ==================================
-    mdap(pending) { |i|
+    mdap(urls.length) { |i|
       agent = Husc.new(urls[i])
     }
   end
@@ -53,7 +54,7 @@ end
 
 
 if __FILE__ == $0
-  crawl(multi: true)
+  crawl(multi: false)
   footer_exit
 end
 
