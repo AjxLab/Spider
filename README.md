@@ -66,7 +66,10 @@ $ bundle exec rake db:clear
 ```sh
 $ bundle exec rake db:clear_<tablename>
 ```
-
+### Clear Log
+```sh
+$ bundle exec rake log:clear
+```
 
 ## Installation
 1. Clone this repo
