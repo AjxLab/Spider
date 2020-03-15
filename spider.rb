@@ -27,7 +27,7 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert:
       agent = Husc.new(url)
 
       # スクレイピング
-      scraping(agent)
+      scraping(agent, delay: delay, depth_limit: depth_limit)
     rescue => e
       $logger.error(e.to_s)
       send_mail($account[:receive][:address], 'エラー発生', e.to_s)  if error_alert
@@ -49,6 +49,7 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert:
     # 逐次処理 ==================================
     mdap(urls.length, echo_bar: echo_bar) { |i|
       task.call(urls[i])
+      sleep delay
     }
   end
 end

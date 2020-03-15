@@ -10,7 +10,7 @@ gem "rspec", "~> 3.0"
 gem "activerecord", require: "active_record"
 gem "sqlite3", "~> 1.4"
 
-gem "husc", ">= 0.3.0"
+gem "husc", ">= 0.4.0"
 gem "ruby-gmail", require: "gmail"
 gem "mdap"
 gem "thwait"
