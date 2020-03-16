@@ -36,7 +36,6 @@ Application Password：**********  # Enter your application password
 $ bundle exec rake setup:line
 TOKEN：your line notify token
 ```
-
 ### Database
 #### Migratiton
 1. Write DB settings in [config/db.yml](config/db.yml)
