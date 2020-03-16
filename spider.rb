@@ -8,7 +8,7 @@ require './mailer'
 START_TIME = Time.new
 URL = 'http://www.example.com/'
 $logger = Logger.new('log/develop.log')
-$account = YAML.load_file('config/.mail.yml')
+$account = YAML.load_file('config/mail.yml')
 $model = Model.new(YAML.load_file('config/db.yml')['file'])
 
 
