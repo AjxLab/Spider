@@ -67,7 +67,7 @@ namespace :setup do
       send:    {address: send[0], password: send[1]},
       receive: {address: receive[0]}
     }
-    YAML.dump(data, File.open('conifg/mail.yml', 'w'))
+    YAML.dump(data, File.open('config/mail.yml', 'w'))
 
     puts ""
     puts "Successful to setup Gmail."
@@ -78,5 +78,8 @@ namespace :setup do
     puts "Enter your LINE access token."
     token = getpass(prompt: ["TOKEN"], is_echo: [true])
     File.open('config/line_token', 'w').write(token[0])
+
+      puts ""
+    puts "Successful to setup LINE."
   end
 end
