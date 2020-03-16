@@ -1,4 +1,4 @@
-def connect_gmail(file: 'config/.mail.yml')
+def connect_gmail(file: 'config/mail.yml')
   ## -----*----- Gmailアカウント -----*----- ##
   begin
     account = YAML.load_file(file)
