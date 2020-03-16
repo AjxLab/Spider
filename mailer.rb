@@ -36,3 +36,17 @@ def send_mail(to_address, _subject, _body)
   $gmail.deliver(message)
 end
 
+
+def send_line(msg)
+  ## -----*----- LINE -----*----- ##
+  token = File.open('config/line_token', 'r').read()
+  uri = URI.parse("https://notify-api.line.me/api/notify")
+  request = Net::HTTP::Post.new(uri)
+  request["Authorization"] = "Bearer #{token}"
+  request.set_form_data(message: msg)
+
+  response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |https|
+    https.request(request)
+  end
+end
+
