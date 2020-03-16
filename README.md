@@ -31,6 +31,12 @@ $ bundle exec rake setup:gmail
 Gmail Address：your.address@gmail.com     # Enter your gmail address
 Application Password：**********  # Enter your application password
 ```
+### Setup LINE
+```sh
+$ bundle exec rake setup:line
+TOKEN：your line notify token
+```
+
 ### Database
 #### Migratiton
 1. Write DB settings in [config/db.yml](config/db.yml)

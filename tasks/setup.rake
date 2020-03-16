@@ -22,6 +22,17 @@ def getpass(prompt:["id", "password"], is_echo:[true, false],
         # 改行
         break if c == "\r"
 
+        # Backspace
+        if c == "\u007F"
+          unless is_echo[i]
+            print "\e[2D  \e[1D"  unless ret[i]==''
+          else
+            print "\e[1D \e[1D"  unless ret[i]==''
+          end
+          ret[i].chop!
+          next
+        end
+
         ret[i] += c
         if is_echo[i]
           putc c
@@ -49,16 +60,23 @@ namespace :setup do
     puts "1. Enter your address to send."
     send = getpass(prompt: ["Gmail Address", "Application Password"])
     puts ""
-    puts "1. Enter your address to receive."
+    puts "2. Enter your address to receive."
     receive = getpass(prompt: ["Gmail Address"], is_echo: [true])
 
     data = {
       send:    {address: send[0], password: send[1]},
       receive: {address: receive[0]}
     }
-    YAML.dump(data, File.open('.mail.yml', 'w'))
+    YAML.dump(data, File.open('conifg/mail.yml', 'w'))
 
     puts ""
     puts "Successful to setup Gmail."
+  end
+
+  desc 'LINE Settings'
+  task :line do
+    puts "Enter your LINE access token."
+    token = getpass(prompt: ["TOKEN"], is_echo: [true])
+    File.open('config/line_token', 'w').write(token[0])
   end
 end
