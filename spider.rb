@@ -44,13 +44,18 @@ def crawl(delay: 3, depth_limit: nil, multi: false, exit_all: true, error_alert:
     }
 
     tw = ThreadsWait.new(*threads)
-    mdap(urls.length, echo_bar: echo_bar) {tw.next_wait}
+    if echo_bar
+      urls.tqdm.each { tw.next_wait }
+    else
+      urls.each { tw.next_wait }
+    end
   else
     # 逐次処理 ==================================
-    mdap(urls.length, echo_bar: echo_bar) { |i|
-      task.call(urls[i])
-      sleep delay
-    }
+    if echo_bar
+      urls.tqdm.each { |url| task.call(url); sleep delay }
+    else
+      urls.each { |url| task.call(url); sleep delay }
+    end
   end
 end
 
@@ -76,7 +81,7 @@ end
 
 
 if __FILE__ == $0
-  crawl(multi: true, exit_all: false)
+  crawl(multi: false)
   footer_exit
 end
 
