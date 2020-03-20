@@ -12,7 +12,7 @@ gem "sqlite3", "~> 1.4"
 
 gem "husc", ">= 0.4.1"
 gem "ruby-gmail", require: "gmail"
-gem "mdap"
+gem "tqdm"
 gem "thwait"
 gem "e2mmap"
 gem "logger"
